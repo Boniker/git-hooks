@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e #x
+
+#Own Realization
+FILE=$1
+ALLOW_PATTERN_ONE='^(TKT-[0-9]+)+([[:space:]]|$)'
+ALLOW_PATTERN_TWO='^(add|chore|feat|major|minor)+([[:space:]]|$)'
+START_LINE=`head -n1 $FILE`
+
+if ! [[ "$START_LINE" =~ $ALLOW_PATTERN_ONE || "$START_LINE" =~ $ALLOW_PATTERN_TWO ]]; then
+  	echo "Commit failed!"
+	echo "ERROR: Commit message format must match regex TKT-[0-9]"
+  	echo "ERROR: Or the commit not starts with add|chore|feat|major|minor"
+	exit 1
+else
+	echo "Commit applied!"
+	echo "The regex was perfectly applied"
+fi
