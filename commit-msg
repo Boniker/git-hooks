@@ -4,8 +4,8 @@ set -e #x
 #Own Realization
 FILE=$1
 ALLOW_PATTERN_ONE='^(TKT-[0-9]+)+([[:space:]]|$)'
-ALLOW_PATTERN_TWO='^(add|chore|feat|major|minor)+([[:space:]]|$)'
-START_LINE=`head -n1 $FILE`
+ALLOW_PATTERN_TWO='^(add|chore|feat|major|minor)(\([^)]+\))?!?(:|[[:space:]]|$)'
+START_LINE=$(head -n1 "$FILE")
 
 if ! [[ "$START_LINE" =~ $ALLOW_PATTERN_ONE || "$START_LINE" =~ $ALLOW_PATTERN_TWO ]]; then
   	echo "Commit failed!"
